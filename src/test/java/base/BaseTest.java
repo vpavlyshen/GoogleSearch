@@ -4,26 +4,24 @@ package base;
 import org.openqa.selenium.WebDriver;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 
 
 public abstract class BaseTest {
 
     private WebDriver driver;
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void initWebDriver() {
         this.driver = this.createDriver();
         driver.manage().window().maximize();
-        System.out.println("Driver initialised");
+        Reporter.log("Driver initialised",true);
     }
 
     @BeforeClass(alwaysRun = true)
     public void startup() {
         driver.navigate().to(System.getProperty("URL"));
-        System.out.println(String.format("Navigate to %s", System.getProperty("URL")));
+        Reporter.log(String.format("Navigate to %s", System.getProperty("URL")),true);
     }
 
     @AfterClass(alwaysRun = true)
@@ -32,7 +30,7 @@ public abstract class BaseTest {
             this.driver.quit();
             this.driver = null;
         }
-        System.out.println("Kill driver");
+        Reporter.log("Kill driver",true);
     }
 
     protected WebDriver createDriver() {

@@ -48,6 +48,6 @@ public class FirstTestStepsDefs extends BaseTest {
 
     @Then("Page title should include {string} word")
     public void pageTitleShouldIncludeWord(String arg0) {
-        fIrstResultPage.diesTitleInclude(SEARCH_QUERY_STRING);
+        fIrstResultPage.doesTitleInclude(SEARCH_QUERY_STRING);
     }
 }

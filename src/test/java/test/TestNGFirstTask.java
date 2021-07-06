@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class AutomationTestTestNG extends BaseTest {
+public class TestNGFirstTask extends BaseTest {
 
     private GoogleHomePage homePage;
     private static final String SEARCH_QUERY_STRING = "automation";
@@ -33,18 +33,18 @@ public class AutomationTestTestNG extends BaseTest {
         Assert.assertTrue(titleText.toLowerCase().contains(SEARCH_QUERY_STRING.toLowerCase()), "Title contain search query valildation");
     }
 
-    @Test
-    public void secondTest() {
-        GoogleSearchResultsPage searchResultsPage = homePage.navigate()
-                .searchSomething(SEARCH_QUERY_STRING);
-        while (numberOfPagesToCheck >= 1) {
-            if (searchResultsPage.isElementPresent(By.xpath(String.format("//a[text()=\"%s\"]", SEARCH_DOMAIN)))) {
-                Assert.assertTrue(true, "Searched domain founded");
-            } else {
-                searchResultsPage.goToNextResultPage();
-                numberOfPagesToCheck = numberOfPagesToCheck - 1;
-                if (numberOfPagesToCheck < 1) Assert.fail("Searched domain not founded");
-            }
-        }
-    }
+//    @Test
+//    public void secondTest() {
+//        GoogleSearchResultsPage searchResultsPage = homePage.navigate()
+//                .searchSomething(SEARCH_QUERY_STRING);
+//        while (numberOfPagesToCheck >= 1) {
+//            if (searchResultsPage.isElementPresent(By.xpath(String.format("//a[text()=\"%s\"]", SEARCH_DOMAIN)))) {
+//                Assert.assertTrue(true, "Searched domain founded");
+//            } else {
+//                searchResultsPage.goToNextResultPage();
+//                numberOfPagesToCheck = numberOfPagesToCheck - 1;
+//                if (numberOfPagesToCheck < 1) Assert.fail("Searched domain not founded");
+//            }
+//        }
+//    }
 }

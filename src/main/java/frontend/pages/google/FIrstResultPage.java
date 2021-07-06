@@ -15,7 +15,7 @@ public class FIrstResultPage extends BaseWebPage{
         return driver.getTitle();
     }
 
-    public boolean diesTitleInclude(String qurey){
+    public boolean doesTitleInclude(String qurey){
        return getTitle().toLowerCase().contains(qurey.toLowerCase());
     }
 }
