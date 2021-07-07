@@ -1,6 +1,11 @@
 package base;
 
 
+import base.drivers.ChromeBrowserDriver;
+import base.drivers.EdgeBrowserDriver;
+import base.drivers.FirefoxBrowserDriver;
+import base.drivers.OperaBrowserDriver;
+import io.cucumber.core.options.CucumberProperties;
 import org.openqa.selenium.WebDriver;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -13,7 +18,7 @@ public abstract class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public void initWebDriver() {
-        this.driver = this.createDriver();
+        this.driver = BuildDriver();
         driver.manage().window().maximize();
         Reporter.log("Driver initialised",true);
     }
@@ -33,8 +38,20 @@ public abstract class BaseTest {
         Reporter.log("Kill driver",true);
     }
 
-    protected WebDriver createDriver() {
-        return DriverProvider.getDriver();
+    public static WebDriver BuildDriver() {
+        String browserType;
+        if (System.getProperty("runningWith") == "TESTNG") {
+            browserType =System.getProperty("browser");
+        } else browserType = CucumberProperties.fromPropertiesFile().get("browser");
+        BrowserNameEnum browser = BrowserNameEnum.valueOf(browserType.toUpperCase());
+
+        switch (browser) {
+            case CHROME: return new ChromeBrowserDriver().createDriver();
+            case FIREFOX: return new FirefoxBrowserDriver().createDriver();
+            case OPERA: return new OperaBrowserDriver().createDriver();
+            case EDGE: return new EdgeBrowserDriver().createDriver();
+            default: throw new IllegalArgumentException("NOT SUPPORTED BROWSER");
+        }
     }
 
     public WebDriver getDriver() {
