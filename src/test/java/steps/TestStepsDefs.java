@@ -10,9 +10,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 public class TestStepsDefs extends BaseTest {
 
@@ -46,7 +45,7 @@ public class TestStepsDefs extends BaseTest {
 
     @Then("Page title should include {string} word")
     public void pageTitleShouldIncludeWord(String SEARCH_QUERY_STRING) {
-        fIrstResultPage.doesTitleInclude(SEARCH_QUERY_STRING);
+        Assert.assertTrue(fIrstResultPage.doesTitleInclude(SEARCH_QUERY_STRING),"Title include correct phrase validation");
     }
 
     @Given("I go to home")
@@ -63,8 +62,8 @@ public class TestStepsDefs extends BaseTest {
     @Then("I am looking for {string}  at {int} first pages")
     public void iAmLookingForAtFirstPages(String searchDomain, int numberOfPagesToCheck) {
         while (numberOfPagesToCheck >= 1) {
-            if (googleSearchResultsPage.isElementPresent(By.xpath(String.format("//a[text()=\"%s\"]", searchDomain)))) {
-                org.junit.Assert.assertTrue("Searched domain founded",true );
+            if (googleSearchResultsPage.isElementPresent( searchDomain)) {
+                Assert.assertTrue(true,"Searched domain founded" );
             } else {
                 googleSearchResultsPage.goToNextResultPage();
                 numberOfPagesToCheck = numberOfPagesToCheck - 1;

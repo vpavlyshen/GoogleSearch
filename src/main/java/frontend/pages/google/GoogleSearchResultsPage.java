@@ -30,9 +30,9 @@ public class GoogleSearchResultsPage extends BaseWebPage {
     }
 
 
-    public boolean isElementPresent(By identifier) {
+    public boolean isElementPresent(String identifierString) {
         try {
-            driver.findElement(identifier);
+            driver.findElement(By.xpath(String.format("//a[text()=\"%s\"]",identifierString)));
             return true;
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;

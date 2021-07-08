@@ -6,8 +6,8 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
         features = {"classpath:parallel/scenarios.feature"},
-        glue = {"steps"},plugin = {"pretty", "html:target/cucumber"})
-public class RunCucumberParaleleTest extends AbstractTestNGCucumberTests {
+        glue = {"steps"},plugin = {"pretty"})
+public class RunCucumberParalleTest extends AbstractTestNGCucumberTests {
 
     @Override
     @DataProvider(parallel = true)
