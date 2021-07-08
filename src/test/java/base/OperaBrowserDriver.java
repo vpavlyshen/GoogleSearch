@@ -1,10 +1,10 @@
-package base.drivers;
+package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.opera.OperaDriver;
 
-public class OperaBrowserDriver extends BrowserDriver{
+ class OperaBrowserDriver extends BrowserDriver{
 
     @Override
     public WebDriver createDriver() {

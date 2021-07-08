@@ -26,10 +26,11 @@
                             <systemPropertyVariables>
                                 <runningWith>TESTNG</runningWith>
                                 <browser>CHROME</browser>
+                                <threadcountser>4</threadcountser>
+                                <parallel>classes</parallel>
                                 <!--                                <browser>FIREFOX</frontend.browser.type>-->
                                 <!--                                <browser>OPERA</frontend.browser.type>-->
                                 <!--                                <browser>EDGE</frontend.browser.type>-->
-                                <URL>https://www.google.com/</URL>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

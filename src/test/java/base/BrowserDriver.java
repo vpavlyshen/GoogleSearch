@@ -1,8 +1,8 @@
-package base.drivers;
+package base;
 
 import org.openqa.selenium.WebDriver;
 
-public abstract class BrowserDriver {
+abstract class BrowserDriver {
 
     protected abstract WebDriver createDriver();
 

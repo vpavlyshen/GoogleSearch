@@ -1,10 +1,10 @@
-package base.drivers;
+package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class FirefoxBrowserDriver extends BrowserDriver{
+ class FirefoxBrowserDriver extends BrowserDriver{
 
     public FirefoxBrowserDriver() {
     }

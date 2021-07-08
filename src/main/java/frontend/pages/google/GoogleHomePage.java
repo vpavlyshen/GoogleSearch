@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class GoogleHomePage extends BaseWebPage {
 
-    private static final String URL = System.getProperty("URL");
+    private static final String URL = "https://www.google.com/";
     @FindBy(xpath = "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
     private WebElement searchInputField;
     @FindBy(xpath = "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[3]/center/input[1]")
@@ -36,11 +36,5 @@ public class GoogleHomePage extends BaseWebPage {
         driver.navigate().to(URL);
         return this;
     }
-
-    public GoogleHomePage navigate(String url) {
-        driver.navigate().to(url);
-        return this;
-    }
-
 
 }
