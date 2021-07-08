@@ -30,10 +30,10 @@ public abstract class BaseTest {
         BrowserNameEnum browser = BrowserNameEnum.valueOf(browserType.toUpperCase());
 
         switch (browser) {
-            case CHROME: return new ChromeBrowserDriver().createDriver();
-            case FIREFOX: return new FirefoxBrowserDriver().createDriver();
-            case OPERA: return new OperaBrowserDriver().createDriver();
-            case EDGE: return new EdgeBrowserDriver().createDriver();
+            case CHROME: return new DriverProvider().createChromeDriver();
+            case FIREFOX: return new DriverProvider().createFirefoxDriver();
+            case OPERA: return new DriverProvider().createOperaDriver();
+            case EDGE: return new DriverProvider().createEdgeDriver();
             default: throw new IllegalArgumentException("NOT SUPPORTED BROWSER");
         }
     }
