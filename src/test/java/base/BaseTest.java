@@ -9,6 +9,7 @@ public abstract class BaseTest {
 
     private WebDriver driver;
 
+
     public void initWebDriver() {
         this.driver = BuildDriver();
         driver.manage().window().maximize();
@@ -24,11 +25,8 @@ public abstract class BaseTest {
 
     protected static WebDriver BuildDriver() {
         String browserType;
-        if (System.getProperty("runningWith") == "TESTNG") {
-            browserType =System.getProperty("browser");
-        } else browserType = CucumberProperties.fromPropertiesFile().get("browser");
+        browserType = CucumberProperties.fromPropertiesFile().get("browser");
         BrowserNameEnum browser = BrowserNameEnum.valueOf(browserType.toUpperCase());
-
         switch (browser) {
             case CHROME: return new DriverProvider().createChromeDriver();
             case FIREFOX: return new DriverProvider().createFirefoxDriver();

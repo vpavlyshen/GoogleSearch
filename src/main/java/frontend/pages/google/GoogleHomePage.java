@@ -9,12 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 public class GoogleHomePage extends BaseWebPage {
 
     private static final String URL = "https://www.google.com/";
-    @FindBy(xpath = "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
+
+    @FindBy(xpath = "//INPUT[@class='gLFyf gsfi']")
     private WebElement searchInputField;
-    @FindBy(xpath = "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[3]/center/input[1]")
-    private WebElement searchButton;
-    @FindBy(xpath = "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[3]/center/input[2]")
-    private WebElement luckySearchButton;
+
 
     public GoogleHomePage(WebDriver driver) {
         super(driver);
@@ -27,13 +25,10 @@ public class GoogleHomePage extends BaseWebPage {
         return new GoogleSearchResultsPage(driver);
     }
 
-    public void luckySearch(String searchQuery) {
-        searchInputField.sendKeys(searchQuery);
-        luckySearchButton.click();
-    }
 
     public GoogleHomePage navigate() {
         driver.navigate().to(URL);
+
         return this;
     }
 

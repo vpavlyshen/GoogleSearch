@@ -6,7 +6,9 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
         features = {"classpath:parallel/scenarios.feature"},
-        glue = {"steps"},plugin = {"pretty"})
+        glue = {"steps"},
+        plugin = {"pretty",
+                "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"})
 public class RunCucumberParalleTest extends AbstractTestNGCucumberTests {
 
     @Override

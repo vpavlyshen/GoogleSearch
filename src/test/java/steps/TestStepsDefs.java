@@ -6,10 +6,13 @@ import frontend.pages.google.GoogleHomePage;
 import frontend.pages.google.GoogleSearchResultsPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -25,10 +28,6 @@ public class TestStepsDefs extends BaseTest {
         homePage = PageFactory.initElements(getDriver(), GoogleHomePage.class);
     }
 
-    @After
-    public void finishIt() {
-        quitDriver();
-    }
 
     @Given("I go to  home page")
     public void iGoToHomePage() {
@@ -36,7 +35,9 @@ public class TestStepsDefs extends BaseTest {
     }
 
     @And("I search {string} query")
-    public void iSearchQuery(String query) {googleSearchResultsPage = homePage.searchSomething(query);}
+    public void iSearchQuery(String query) {
+        googleSearchResultsPage = homePage.searchSomething(query);
+    }
 
     @When("I go to first result")
     public void iGoToFirstResult() {
@@ -45,7 +46,7 @@ public class TestStepsDefs extends BaseTest {
 
     @Then("Page title should include {string} word")
     public void pageTitleShouldIncludeWord(String SEARCH_QUERY_STRING) {
-        Assert.assertTrue(fIrstResultPage.doesTitleInclude(SEARCH_QUERY_STRING),"Title include correct phrase validation");
+        Assert.assertTrue(fIrstResultPage.doesTitleInclude(SEARCH_QUERY_STRING), "Title include correct phrase validation");
     }
 
     @Given("I go to home")
@@ -62,8 +63,8 @@ public class TestStepsDefs extends BaseTest {
     @Then("I am looking for {string}  at {int} first pages")
     public void iAmLookingForAtFirstPages(String searchDomain, int numberOfPagesToCheck) {
         while (numberOfPagesToCheck >= 1) {
-            if (googleSearchResultsPage.isElementPresent( searchDomain)) {
-                Assert.assertTrue(true,"Searched domain founded" );
+            if (googleSearchResultsPage.isElementPresent(searchDomain)) {
+                Assert.assertTrue(true, "Searched domain founded");
             } else {
                 googleSearchResultsPage.goToNextResultPage();
                 numberOfPagesToCheck = numberOfPagesToCheck - 1;
@@ -72,5 +73,18 @@ public class TestStepsDefs extends BaseTest {
         }
     }
 
-
+    @After
+    public void finishIt(Scenario scenario) {
+        try {
+            String screenShotName = scenario.getName();
+            if (scenario.isFailed()) {
+                TakesScreenshot screenTaker = (TakesScreenshot) getDriver();
+                byte[] screenshot = screenTaker.getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", screenShotName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        quitDriver();
+    }
 }
